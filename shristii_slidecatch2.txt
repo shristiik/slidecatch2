@@ -1,0 +1,67 @@
+Pseudocode:
+Initialization and Setup:
+Initialize pygame
+Create a Game class subclassing sg.Scene
+
+Create a Coin class subclassing sg.Sprite
+    - Initialize Coin with scene reference
+    - Define reset method to randomize coin position and speed
+
+Create a Spaceship class subclassing sg.Sprite
+    - Initialize Spaceship with scene reference
+    - Define process method to handle spaceship movement
+
+Create LblScore and LblTime classes subclassing sg.Label
+
+Create an Instructions class subclassing sg.Scene
+    - Initialize Instructions with score parameter
+    - Display instructions, previous score, and buttons for play and quit
+
+In the main function:
+    Initialize pygame
+    Initialize a score variable to 0
+Game Loop:
+While keepGoing is True:
+    Instantiate Instructions scene with score
+    Start Instructions scene
+
+    If response from Instructions is "Play":
+        Instantiate Game scene
+        Start Game scene
+        Update score with Game's score
+
+    If response from Instructions is "Quit":
+        Set keepGoing to False
+Game Scene Functionality:
+In the Game class:
+    Initialize scene with background image, timer, score, and sound effect
+
+    Initialize Spaceship sprite and Coin sprites
+    Add sprites to scene sprites list
+
+    While game is running:
+        Process user input to move Spaceship
+        For each coin in coins:
+            Check collision with Spaceship
+            If collision:
+                Play sound effect
+                Reset coin position
+                Increment score
+                Update score label
+
+        Update time left label with timer's value
+        If time left is 0:
+            Print final score
+            Stop scene
+Instructions Scene Functionality:
+In the Instructions class:
+    Initialize scene with background image, instructions, score label, and buttons
+
+    While scene is active:
+        Check button clicks
+        If Play button clicked or UP key pressed:
+            Set response to "Play"
+            Stop scene
+        If Quit button clicked or DOWN key pressed:
+            Set response to "Quit"
+            Stop scene
